@@ -13,5 +13,10 @@ tqdm
 lxml
 
 
+pymongo==3.4.0
+
+mongoengine==0.10.7
+
+
 
 
