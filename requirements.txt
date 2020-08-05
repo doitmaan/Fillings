@@ -17,6 +17,12 @@ pymongo==3.4.0
 
 mongoengine==0.10.7
 
+ftfy==4.4.3
+
+
+clean-text
+
+
 
 
 
