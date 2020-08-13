@@ -1,35 +1,18 @@
-import requests
-
-
-from ratelimit import limits, sleep_and_retry
-
-
-class SecAPI(object):
-    SEC_CALL_LIMIT = {'calls': 10, 'seconds': 1}
-
-    @staticmethod
-    @sleep_and_retry
-    # Dividing the call limit by half to avoid coming close to the limit
-    @limits(calls=SEC_CALL_LIMIT['calls'] / 2, period=SEC_CALL_LIMIT['seconds'])
-    def _call_sec(url):
-        return requests.get(url)
-
-    def get(self, url):
-        return self._call_sec(url).text
-
-
+# this is used to get all tickers from the market.
 from ftplib import FTP
 import os
 import errno
 
 
-# this is used to get all tickers from the market.
+
 
 
 exportList = []
 
+class NasdaqController:
 
-class NasdaqController(object):
+    
+
     def getList(self):
         return exportList
 
@@ -63,6 +46,8 @@ class NasdaqController(object):
 
         all_listed = open("data/alllisted.txt", 'w')
 
+        exportList[:] = []
+
         for filename, filepath in self.filenames.items():
             with open(filepath, "r") as file_reader:
                 for i, line in enumerate(file_reader, 0):
@@ -76,7 +61,8 @@ class NasdaqController(object):
                         continue
 
                     all_listed.write(line[0] + ",")
-                    global exportList
+                    
+
+                    
                     exportList.append(line[0])
                     all_listed.write(line[0] + "|" + line[1] + "\n")
-       
