@@ -22,7 +22,9 @@ ftfy==4.4.3
 
 clean-text
 
+dash==1.14.0
 
+csv-to-sqlite
 
 
 
