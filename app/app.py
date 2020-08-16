@@ -4,12 +4,12 @@ import dash_html_components as html
 import pandas as pd
 from dash.dependencies import Input, Output
 import socket
+import config
 
 # host = socket.gethostbyname(socket.getfqdn()) # or socket.getfqdn() if the former doesn't work
 
-
 df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv')
-
+df = pd.read_csv('./cik.csv')
 
 def generate_table(dataframe, max_rows=10):
     return html.Table([
@@ -48,8 +48,12 @@ def displayClick(btn1):
     return html.Div(msg)
 
 
+def main():
+    app.run_server(host='0.0.0.0', port=config.PORT, debug=True)
+
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=8050, debug=True)
+    main()
+    
     
     
 
